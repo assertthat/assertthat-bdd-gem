@@ -1,0 +1,3 @@
+# Coming soon ... 
+
+[![Build Status](https://travis-ci.org/assertthat/assertthat-bdd-gem.svg?branch=master)](https://travis-ci.org/assertthat/assertthat-bdd-gem)

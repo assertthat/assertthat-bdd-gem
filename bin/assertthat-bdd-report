@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+require 'assertthat-bdd'
+require 'optparse'
+
+VERSION = '0.0.1'
+
+options = {}
+OptionParser.new do |opt|
+  opt.on('-a','--accessKey ACCESS_KEY', 'Access key same as env variable ASSERTTHAT_ACCESS_KEY') { |o| options[:accessKey] = o }
+  opt.on('-s','--secretKey SECRET_KEY', 'Secret key same as env variable ASSERTTHAT_SECRET_KEY') { |o| options[:secretKey] = o }
+  opt.on('-p', '--projectId PROJECT_ID', 'Jira project id') { |o| options[:projectId] = o }
+  opt.on('-n','--runName RUN_NAME', 'The name of the run - default \'Test run dd MMM yyyy HH:mm:ss\'') { |o| options[:runName] = o }
+  opt.on('-f','--jsonReportFolder JSON_FOLDER_PATH', 'Json report folder - default ./reports') { |o| options[:mode] = o }
+  opt.on('-i','--jsonReportIncludePattern INCLUDE_REGEX', 'Regex to search for cucumber reports - default .*.json') { |o| options[:jql] = o }
+  opt.on('-x','--proxy PROXY_URL', 'proxy url to connect to Jira') { |o| options[:proxy] = o }
+  opt.on_tail('-h', '--help', 'Show help') do
+  	puts opt
+  	exit
+  end
+  opt.on_tail('-v','--version', 'Show version') do
+  	puts VERSION
+    exit
+  end
+end.parse!
+
+raise OptionParser::MissingArgument, "'projectId' option is not specified" if options[:projectId].nil?
+
+AssertThatBDD::Report.upload(options)
+
+

@@ -1,0 +1,4 @@
+features/
+reports/
+*.gem
+install.bat

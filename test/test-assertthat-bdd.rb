@@ -1,5 +1,4 @@
 require 'minitest/autorun'
-require 'hola'
 
 class AssertThatBDDTest < Minitest::Test
   def test_features

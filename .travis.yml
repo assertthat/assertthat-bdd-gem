@@ -3,4 +3,5 @@ deploy:
   api_key: $API_KEY
   gem: assertthat-bdd
   on:
+    tags: true
     repo: assertthat/assertthat-bdd-gem

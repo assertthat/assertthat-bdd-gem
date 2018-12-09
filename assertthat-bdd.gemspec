@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.licenses    = ['MIT']
   s.executables   = ["assertthat-bdd-features", "assertthat-bdd-report"]  
   s.add_runtime_dependency 'rest-client', '~> 2.0', '>= 2.0.2'
-  s.add_runtime_dependency 'rubyzip', '>= 1.0.0'
+  s.add_runtime_dependency 'rubyzip', '~> 1.0', '>= 1.0.0'
   s.files = [
     "lib/assertthat-bdd.rb"
   ]

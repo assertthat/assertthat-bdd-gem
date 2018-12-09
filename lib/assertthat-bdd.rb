@@ -31,12 +31,15 @@ module AssertThatBDD
 		end
 		Dir.mkdir("#{outputFolder}") unless File.exists?("#{outputFolder}")
 		File.open("#{outputFolder}/features.zip", 'wb') {|f| f.write(contents) }
+		features_count = 0
 		Zip::File.open("#{outputFolder}/features.zip") do |zip_file|
 		  zip_file.each do |entry|
+		  	features_count = features_count + 1
 			File.delete("#{outputFolder}#{entry.name}") if File.exists?("#{outputFolder}#{entry.name}")
 			entry.extract("#{outputFolder}#{entry.name}")
 		  end
 		end
+		puts "[INFO] #{features_count} features downloaded"
 		File.delete("#{outputFolder}/features.zip")
 	end
   end
@@ -45,6 +48,7 @@ module AssertThatBDD
     def self.upload(accessKey: ENV['ASSERTTHAT_ACCESS_KEY'], secretKey: ENV['ASSERTTHAT_ACCESS_KEY'], projectId: nil, runName: 'Test run '+Time.now.strftime("%d %b %Y %H:%M:%S"), jsonReportFolder: './reports', jsonReportIncludePattern: '.*.json'  )
     	url = "https://bdd.assertthat.com/rest/api/1/project/" + projectId + "/report"
     	files = Find.find(jsonReportFolder).grep(/#{jsonReportIncludePattern}/)
+    	puts "[INFO] #{files.count} found matching parretn #{jsonReportIncludePattern}:"
     	runId = -1
     	files.each do |f|
 			request = RestClient::Request.new(

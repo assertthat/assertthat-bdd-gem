@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = %q{assertthat-bdd}
-  s.version = "1.0.1"
-  s.date = %q{2018-12-07}
+  s.version = "1.0.2"
+  s.date = %q{2018-12-09}
   s.summary = %q{AssertThat bdd integration for Ruby}
   s.authors     = ["Glib Briia"]
   s.email       = 'glib.briia@assertthat.com'

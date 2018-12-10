@@ -106,4 +106,4 @@ end
 
 ### Example project 
 
-Refer to example project for runing using Rake [assertthat-bdd-ruby-example](https://github.com/assertthat/assertthat-bdd-ruby-example)
+Refer to example project for running using Rake [assertthat-bdd-ruby-example](https://github.com/assertthat/assertthat-bdd-ruby-example)

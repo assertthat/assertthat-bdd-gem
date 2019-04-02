@@ -2,7 +2,7 @@
 
 ## Description
 
-Ruby gem for interaction with AssertThat BDD Jira plugin.
+Ruby gem for interaction with [AssertThat BDD Jira plugin](https://marketplace.atlassian.com/apps/1219033/assertthat-bdd-test-management-in-jira?hosting=cloud&tab=overview).
 
 Main features are:
 

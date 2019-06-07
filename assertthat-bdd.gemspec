@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.date = %q{2018-12-09}
   s.summary = %q{AssertThat bdd integration for Ruby}
   s.authors     = ["Glib Briia"]
-  s.email       = 'glib.briia@assertthat.com'
+  s.email       = 'glib@assertthat.com'
   s.homepage    = 'https://rubygems.org/gems/assertthat-bdd'
   s.licenses    = ['MIT']
   s.executables   = ["assertthat-bdd-features", "assertthat-bdd-report"]  

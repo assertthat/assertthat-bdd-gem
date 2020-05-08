@@ -2,12 +2,13 @@
 require 'assertthat-bdd'
 require 'optparse'
 
-VERSION = '1.0.2'
+VERSION = '1.2.0'
 
 options = {}
 OptionParser.new do |opt|
   opt.on('-a','--accessKey ACCESS_KEY', 'Access key same as env variable ASSERTTHAT_ACCESS_KEY') { |o| options[:accessKey] = o }
   opt.on('-s','--secretKey SECRET_KEY', 'Secret key same as env variable ASSERTTHAT_SECRET_KEY') { |o| options[:secretKey] = o }
+  opt.on('-u','--jiraServerUrl SERVER_URL', 'Jira server URL') { |o| options[:jiraServerUrl] = o }
   opt.on('-p', '--projectId PROJECT_ID', 'Jira project id') { |o| options[:projectId] = o }
   opt.on('-n','--runName RUN_NAME', 'The name of the run - default \'Test run dd MMM yyyy HH:mm:ss\'') { |o| options[:runName] = o }
   opt.on('-f','--jsonReportFolder JSON_FOLDER_PATH', 'Json report folder - default ./reports') { |o| options[:mode] = o }

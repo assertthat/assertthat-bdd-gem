@@ -5,9 +5,10 @@ require 'json'
 
 module AssertThatBDD
   class Features
-    def self.download(accessKey: ENV['ASSERTTHAT_ACCESS_KEY'], secretKey: ENV['ASSERTTHAT_ACCESS_KEY'], projectId: nil, outputFolder: './features/', proxy: nil, mode: 'automated', jql: '')
+    def self.download(accessKey: ENV['ASSERTTHAT_ACCESS_KEY'], secretKey: ENV['ASSERTTHAT_ACCESS_KEY'], projectId: nil, outputFolder: './features/', proxy: nil, mode: 'automated', jql: '', jiraServerUrl: nil)
 		RestClient.proxy = proxy unless proxy.nil?
 		url = 'https://bdd.assertthat.app/rest/api/1/project/'+ projectId +'/features'
+		url = jiraServerUrl+"/rest/assertthat/latest/project/"+projectId+"/client/features" unless jiraServerUrl.nil?
 		resource = RestClient::Resource.new(url, :user => accessKey, :password => secretKey, :content_type => 'application/zip')
 		begin
 			contents = resource.get(:accept => 'application/zip', params: {mode: mode, jql: jql})
@@ -46,7 +47,8 @@ module AssertThatBDD
   
   class Report
     def self.upload(accessKey: ENV['ASSERTTHAT_ACCESS_KEY'], secretKey: ENV['ASSERTTHAT_ACCESS_KEY'], projectId: nil, runName: 'Test run '+Time.now.strftime("%d %b %Y %H:%M:%S"), jsonReportFolder: './reports', jsonReportIncludePattern: '.*.json'  )
-    	url = "https://bdd.assertthat.app/rest/api/1/project/" + projectId + "/report"
+		url = "https://bdd.assertthat.app/rest/api/1/project/" + projectId + "/report"
+		url = jiraServerUrl+"/rest/assertthat/latest/project/"+projectId+"/client/report" unless jiraServerUrl.nil?
     	files = Find.find(jsonReportFolder).grep(/#{jsonReportIncludePattern}/)
     	puts "*** INFO: #{files.count} files found matching parretn #{jsonReportIncludePattern}:"
     	puts "*** INFO: #{files}"

@@ -34,6 +34,7 @@ assertthat-bdd-features -h
 Usage: assertthat-bdd-features [options]
     -a, --accessKey ACCESS_KEY       Access key same as env variable ASSERTTHAT_ACCESS_KEY
     -s, --secretKey SECRET_KEY       Secret key same as env variable ASSERTTHAT_SECRET_KEY
+    -u, --jiraServerUrl SERVER_URL   Jira Server URL (Only for jira server integration) e.g. https://mycompanyjira.com
     -p, --projectId PROJECT_ID       Jira project id
     -o, --outputFolder OUTPUT_FOLDER Featured output folder - default ./features
     -m, --mode MODE                  Mode one of automated,manual,both - deafult automated
@@ -51,6 +52,7 @@ assertthat-bdd-report -h
 Usage: assertthat-bdd-report [options]
     -a, --accessKey ACCESS_KEY       Access key same as env variable ASSERTTHAT_ACCESS_KEY
     -s, --secretKey SECRET_KEY       Secret key same as env variable ASSERTTHAT_SECRET_KEY
+    -u, --jiraServerUrl SERVER_URL   Jira Server URL (Only for jira server integration) e.g. https://mycompanyjira.com
     -p, --projectId PROJECT_ID       Jira project id
     -n, --runName RUN_NAME           The name of the run - default 'Test run dd MMM yyyy HH:mm:ss'
     -f JSON_FOLDER_PATH,             Json report folder - default ./reports

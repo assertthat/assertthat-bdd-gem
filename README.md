@@ -19,7 +19,7 @@ gem install assertthat-bdd
 OR add to Gemfile
 
 ```
-gem 'assertthat-bdd', '~> 1.0', '>= 1.0.2'
+gem 'assertthat-bdd', '~> 1.0', '>= 1.2.0'
 ```
 
 ## Usage
@@ -75,6 +75,8 @@ task :download_features do
     accessKey:'ASSERTTHAT_ACCESS_KEY',
     #Optional can be supplied as environment variable ASSERTTHAT_SECRET_KEY
     secretKey:'ASSERTTHAT_SECRET_KEY', 
+    #Required for Jira Server only. Omit if using Jira Cloud version
+    jiraServerUrl: 'https://mycompanyjira.com'
     #Required Jira project id e.g. 10001
     projectId: 'PROJECT_ID',
     #Optional - default ./features
@@ -93,7 +95,9 @@ task :upload_report do
     #Optional can be supplied as environment variable ASSERTTHAT_ACCESS_KEY
     accessKey:'ASSERTTHAT_ACCESS_KEY',
     #Optional can be supplied as environment variable ASSERTTHAT_SECRET_KEY
-    secretKey:'ASSERTTHAT_SECRET_KEY', 
+    secretKey:'ASSERTTHAT_SECRET_KEY',
+    #Required for Jira Server only. Omit if using Jira Cloud version
+    jiraServerUrl: 'https://mycompanyjira.com'
     #Jira project id e.g. 10001
     projectId: 'PROJECT_ID',
     #The name of the run - default 'Test run dd MMM yyyy HH:mm:ss'

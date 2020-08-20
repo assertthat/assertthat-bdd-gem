@@ -38,6 +38,7 @@ Usage: assertthat-bdd-features [options]
     -p, --projectId PROJECT_ID       Jira project id
     -o, --outputFolder OUTPUT_FOLDER Featured output folder - default ./features
     -m, --mode MODE                  Mode one of automated,manual,both - deafult automated
+    -t, --tags <tag-expression>      Cucucmber tag expression for scenarios filtering
     -j, --jql JQL_FILTER             Jql issues filter
     -x, --proxy PROXY_URL            proxy url to connect to Jira
     -h, --help                       Show help
@@ -85,6 +86,8 @@ task :download_features do
     proxy: 'PROXY_URL',
     #Optional - default automated (can be one of: manual/automated/both)
     mode: 'automated',
+    #Optional - tag expression filter for scenarios. More on tag expressions https://cucumber.io/docs/cucumber/api/#tag-expressions
+    tags: '(@smoke or @ui) and (not @slow)',
     #Optional - all features downloaded by default - should be a valid JQL
     jql: 'project = XX AND key in (\'XXX-1\')'
   ) 

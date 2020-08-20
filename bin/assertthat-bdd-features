@@ -12,6 +12,7 @@ OptionParser.new do |opt|
   opt.on('-p','--projectId PROJECT_ID', 'Jira project id') { |o| options[:projectId] = o }
   opt.on('-o','--outputFolder OUTPUT_FOLDER', 'Featured output folder - default ./features') { |o| options[:outputFolder] = o }
   opt.on('-m','--mode MODE', 'Mode one of automated,manual,both - deafult automated') { |o| options[:mode] = o }
+  opt.on('-t','--tags <tag-expression>', 'Cucucmber tag expression for scenarios filtering') { |o| options[:tags] = o }
   opt.on('-j','--jql JQL_FILTER', 'Jql issues filter') { |o| options[:jql] = o }
   opt.on('-x','--proxy PROXY_URL', 'proxy url to connect to Jira') { |o| options[:proxy] = o }
   opt.on_tail('-h', '--help', 'Show help') do

@@ -5,13 +5,13 @@ require 'json'
 
 module AssertThatBDD
   class Features
-    def self.download(accessKey: ENV['ASSERTTHAT_ACCESS_KEY'], secretKey: ENV['ASSERTTHAT_ACCESS_KEY'], projectId: nil, outputFolder: './features/', proxy: nil, mode: 'automated', jql: '', jiraServerUrl: nil)
+    def self.download(accessKey: ENV['ASSERTTHAT_ACCESS_KEY'], secretKey: ENV['ASSERTTHAT_ACCESS_KEY'], projectId: nil, outputFolder: './features/', proxy: nil, mode: 'automated', jql: '', tags: '', jiraServerUrl: nil)
 		RestClient.proxy = proxy unless proxy.nil?
 		url = 'https://bdd.assertthat.app/rest/api/1/project/'+ projectId +'/features'
 		url = jiraServerUrl+"/rest/assertthat/latest/project/"+projectId+"/client/features" unless jiraServerUrl.nil?
 		resource = RestClient::Resource.new(url, :user => accessKey, :password => secretKey, :content_type => 'application/zip')
 		begin
-			contents = resource.get(:accept => 'application/zip', params: {mode: mode, jql: jql})
+			contents = resource.get(:accept => 'application/zip', params: {mode: mode, jql: jql, tags: tags})
 	    rescue => e
 	    	 
 	  			if e.respond_to?('response') then

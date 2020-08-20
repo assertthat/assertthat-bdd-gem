@@ -19,7 +19,7 @@ gem install assertthat-bdd
 OR add to Gemfile
 
 ```
-gem 'assertthat-bdd', '~> 1.0', '>= 1.3.0'
+gem 'assertthat-bdd', '~> 1.0', '>= 1.4.0'
 ```
 
 ## Usage

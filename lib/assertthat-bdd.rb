@@ -7,11 +7,21 @@ module AssertThatBDD
   class Features
     def self.download(accessKey: ENV['ASSERTTHAT_ACCESS_KEY'], secretKey: ENV['ASSERTTHAT_ACCESS_KEY'], projectId: nil, outputFolder: './features/', proxy: nil, mode: 'automated', jql: '', tags: '', jiraServerUrl: nil)
 		RestClient.proxy = proxy unless proxy.nil?
-		url = ['https://heavy-bat-23.loca.lt/rest/api/1/project/', projectId, '/features'].map(&:to_s).join('')
+		url = ['https://bdd.assertthat.app/rest/api/1/project/', projectId, '/features'].map(&:to_s).join('')
 		url = [jiraServerUrl,"/rest/assertthat/latest/project/",projectId,"/client/features"].map(&:to_s).join('') unless jiraServerUrl.nil?
 		resource = RestClient::Resource.new(url, :user => accessKey, :password => secretKey, :content_type => 'application/zip')
-		begin
 			resource.get(:accept => 'application/zip', params: {mode: mode, jql: jql, tags: tags}) do |response, request, result|
+					case response.code
+		              when 401
+		                puts '*** ERROR: Unauthorized error (401). Supplied secretKey/accessKey is invalid'
+						return
+		              when 400
+		                puts '*** ERROR: ' + e.response	
+						return						
+		              when 500
+		                puts '*** ERROR: Jira server error (500)'
+						return
+		            end
 			Dir.mkdir("#{outputFolder}") unless File.exists?("#{outputFolder}")
 			File.open("#{outputFolder}/features.zip", 'wb') {|f| f.write(response) }
 			features_count = 0
@@ -27,24 +37,6 @@ module AssertThatBDD
 				puts "*** INFO: #{features_count} features downloaded"
 			end
 			File.delete("#{outputFolder}/features.zip")
-	    rescue => e
-	    	 
-	  			if e.respond_to?('response') then
-					if e.response.respond_to?('code') then
-		            case e.response.code
-		              when 401
-		                puts '*** ERROR: Unauthorized error (401). Supplied secretKey/accessKey is invalid'
-		              when 400
-		                puts '*** ERROR: ' + e.response		          
-		              when 500
-		                puts '*** ERROR: Jira server error (500)'
-		            end
-		          end
-				  else
-		        	puts '*** ERROR: Failed download features: ' + e.message
-		        end
-				return
-		end
 		end
 		end
 	end

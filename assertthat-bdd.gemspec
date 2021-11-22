@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{assertthat-bdd}
-  s.version = "1.5.0"
+  s.version = "1.6.1"
   s.date = %q{2020-05-08}
   s.summary = %q{AssertThat bdd integration for Ruby}
   s.authors     = ["Glib Briia"]

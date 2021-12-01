@@ -2,7 +2,7 @@
 require 'assertthat-bdd'
 require 'optparse'
 
-VERSION = '1.2.0'
+VERSION = '1.6.2'
 
 options = {}
 OptionParser.new do |opt|
@@ -27,7 +27,7 @@ end.parse!
 
 raise OptionParser::MissingArgument, "'projectId' option is not specified" if options[:projectId].nil?
 
-AssertThatBDD::Features.download(options)
+AssertThatBDD::Features.download(**options)
 
  
   

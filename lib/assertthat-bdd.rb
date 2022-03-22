@@ -43,7 +43,7 @@ module AssertThatBDD
   end
   
   class Report
-    def self.upload(accessKey: ENV['ASSERTTHAT_ACCESS_KEY'], secretKey: ENV['ASSERTTHAT_ACCESS_KEY'], projectId: nil, runName: 'Test run '+Time.now.strftime("%d %b %Y %H:%M:%S"), jsonReportFolder: './reports', jsonReportIncludePattern: '.*.json', jiraServerUrl: nil  )
+    def self.upload(accessKey: ENV['ASSERTTHAT_ACCESS_KEY'], secretKey: ENV['ASSERTTHAT_ACCESS_KEY'], projectId: nil, runName: 'Test run '+Time.now.strftime("%d %b %Y %H:%M:%S"), jsonReportFolder: './reports', jsonReportIncludePattern: '.*.json', jql: nil ,jiraServerUrl: nil  )
 		url = "https://bdd.assertthat.app/rest/api/1/project/" + projectId + "/report"
 		url = jiraServerUrl+"/rest/assertthat/latest/project/"+projectId+"/client/report" unless jiraServerUrl.nil?
     	files = Find.find(jsonReportFolder).grep(/#{jsonReportIncludePattern}/)
@@ -60,7 +60,7 @@ module AssertThatBDD
 		            :multipart => true,
 		            :file => File.new(f, 'rb')
 	        	},
-	        	:headers => { :params =>{:runName => runName, :runId=> runId}}
+	        	:headers => { :params =>{:runName => runName, :runId=> runId, :jql=> jql}}
         	)      
         	begin
 	  			response = request.execute 

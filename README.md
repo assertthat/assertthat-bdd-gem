@@ -60,6 +60,7 @@ Usage: assertthat-bdd-report [options]
         --jsonReportFolder
     -i INCLUDE_REGEX,                Regex to search for cucumber reports - default .*.json
         --jsonReportIncludePattern
+    -j, --jql JQL_FILTER             Jql filtering of Jira tickets to update with test results
     -x, --proxy PROXY_URL            proxy url to connect to Jira
     -h, --help                       Show help
     -v, --version                    Show version
@@ -108,7 +109,9 @@ task :upload_report do
     #Json report folder - default ./reports
     jsonReportFolder: "reports",
     #Regex to search for cucumber reports - default .*.json
-    jsonReportIncludePattern: ".*/cucumber.json"
+    jsonReportIncludePattern: ".*/cucumber.json",
+    #Optional - all issues will be updated by default - should be a valid JQL
+    jql: 'project = XX AND key in (\'XXX-1\')'
   ) 
 end
 ```

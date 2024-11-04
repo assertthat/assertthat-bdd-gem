@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/assertthat/assertthat-bdd-gem.svg?branch=master)](https://travis-ci.org/assertthat/assertthat-bdd-gem)
-
 ## Description
 
 Ruby gem for interaction with [AssertThat BDD Jira plugin](https://marketplace.atlassian.com/apps/1219033/assertthat-bdd-test-management-in-jira?hosting=cloud&tab=overview).
@@ -19,7 +17,7 @@ gem install assertthat-bdd
 OR add to Gemfile
 
 ```
-gem 'assertthat-bdd', '~> 1.0', '>= 1.4.0'
+gem 'assertthat-bdd', '~> 1.0', '>= 1.6.4'
 ```
 
 ## Usage
@@ -32,17 +30,18 @@ gem 'assertthat-bdd', '~> 1.0', '>= 1.4.0'
 assertthat-bdd-features -h
 
 Usage: assertthat-bdd-features [options]
-    -a, --accessKey ACCESS_KEY       Access key same as env variable ASSERTTHAT_ACCESS_KEY
-    -s, --secretKey SECRET_KEY       Secret key same as env variable ASSERTTHAT_SECRET_KEY
-    -u, --jiraServerUrl SERVER_URL   Jira Server URL (Only for jira server integration) e.g. https://mycompanyjira.com
-    -p, --projectId PROJECT_ID       Jira project id
-    -o, --outputFolder OUTPUT_FOLDER Featured output folder - default ./features
-    -m, --mode MODE                  Mode one of automated,manual,both - deafult automated
-    -t, --tags <tag-expression>      Cucucmber tag expression for scenarios filtering
-    -j, --jql JQL_FILTER             Jql issues filter
-    -x, --proxy PROXY_URL            proxy url to connect to Jira
-    -h, --help                       Show help
-    -v, --version                    Show version
+    --accessKey ACCESS_KEY       Access key same as env variable ASSERTTHAT_ACCESS_KEY
+    --secretKey SECRET_KEY       Secret key same as env variable ASSERTTHAT_SECRET_KEY
+    --token ASSERTTHAT_API_TOKEN  Jira API token (for DataCenter only) as an alternative to accessKey/secretKey basic auth
+    --jiraServerUrl SERVER_URL   Jira Server URL (Only for jira server integration) e.g. https://mycompanyjira.com
+    --projectId PROJECT_ID       Jira project id
+    --outputFolder OUTPUT_FOLDER Featured output folder - default ./features
+    --mode MODE                  Mode one of automated,manual,both - deafult automated
+    --tags <tag-expression>      Cucucmber tag expression for scenarios filtering
+    --jql JQL_FILTER             Jql issues filter
+    --proxy PROXY_URL            proxy url to connect to Jira
+    --help                       Show help
+    --version                    Show version
 ```
 
 - For submitting the report after the run ferer to usage below
@@ -51,19 +50,18 @@ Usage: assertthat-bdd-features [options]
 assertthat-bdd-report -h
 
 Usage: assertthat-bdd-report [options]
-    -a, --accessKey ACCESS_KEY       Access key same as env variable ASSERTTHAT_ACCESS_KEY
-    -s, --secretKey SECRET_KEY       Secret key same as env variable ASSERTTHAT_SECRET_KEY
-    -u, --jiraServerUrl SERVER_URL   Jira Server URL (Only for jira server integration) e.g. https://mycompanyjira.com
-    -p, --projectId PROJECT_ID       Jira project id
-    -n, --runName RUN_NAME           The name of the run - default 'Test run dd MMM yyyy HH:mm:ss'
-    -f JSON_FOLDER_PATH,             Json report folder - default ./reports
-        --jsonReportFolder
-    -i INCLUDE_REGEX,                Regex to search for cucumber reports - default .*.json
-        --jsonReportIncludePattern
-    -j, --jql JQL_FILTER             Jql filtering of Jira tickets to update with test results
-    -x, --proxy PROXY_URL            proxy url to connect to Jira
-    -h, --help                       Show help
-    -v, --version                    Show version
+    --accessKey ACCESS_KEY       Access key same as env variable ASSERTTHAT_ACCESS_KEY
+    --secretKey SECRET_KEY       Secret key same as env variable ASSERTTHAT_SECRET_KEY
+    --token ASSERTTHAT_API_TOKEN  Jira API token (for DataCenter only) as an alternative to accessKey/secretKey basic auth
+    --jiraServerUrl SERVER_URL   Jira Server URL (Only for jira server integration) e.g. https://mycompanyjira.com
+    --projectId PROJECT_ID       Jira project id
+    --runName RUN_NAME           The name of the run - default 'Test run dd MMM yyyy HH:mm:ss'
+    --jsonReportFolder JSON_FOLDER_PATH,             Json report folder - default ./reports
+    --jsonReportIncludePattern INCLUDE_REGEX,                Regex to search for cucumber reports - default .*.json
+    --jql JQL_FILTER             Jql filtering of Jira tickets to update with test results
+    --proxy PROXY_URL            proxy url to connect to Jira
+    --help                       Show help
+    --version                    Show version
 ```
 
 ### If using Rake
@@ -76,7 +74,9 @@ task :download_features do
     #Optional can be supplied as environment variable ASSERTTHAT_ACCESS_KEY
     accessKey:'ASSERTTHAT_ACCESS_KEY',
     #Optional can be supplied as environment variable ASSERTTHAT_SECRET_KEY
-    secretKey:'ASSERTTHAT_SECRET_KEY', 
+    secretKey:'ASSERTTHAT_SECRET_KEY',
+    #Optional Jira API token (for DataCenter only) as an alternative to accessKey/secretKey basic auth
+    token: 'ASSERTTHAT_TOKEN'  
     #Required for Jira Server only. Omit if using Jira Cloud version
     jiraServerUrl: 'https://mycompanyjira.com'
     #Required Jira project id e.g. 10001
@@ -100,6 +100,8 @@ task :upload_report do
     accessKey:'ASSERTTHAT_ACCESS_KEY',
     #Optional can be supplied as environment variable ASSERTTHAT_SECRET_KEY
     secretKey:'ASSERTTHAT_SECRET_KEY',
+    #Optional Jira API token (for DataCenter only) as an alternative to accessKey/secretKey basic auth
+    token: 'ASSERTTHAT_TOKEN' 
     #Required for Jira Server only. Omit if using Jira Cloud version
     jiraServerUrl: 'https://mycompanyjira.com'
     #Jira project id e.g. 10001
